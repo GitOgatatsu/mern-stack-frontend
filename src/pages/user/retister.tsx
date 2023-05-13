@@ -10,9 +10,8 @@ const Register = () => {
 
 	const handleSubmit = async (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
-		console.log("ABC", name, email, password);
 		try {
-			 	const response = await fetch("http://localhost:5000/user/register", {
+			const response = await fetch("http://localhost:5000/user/register", {
 				method: "POST",
 				headers: {
 					"Accept": "application/json",
