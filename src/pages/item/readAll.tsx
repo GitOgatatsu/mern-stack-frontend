@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 type ItemType = {
-//	_id: string;
-//	title: string;
-//	image: string;
-//	price: string;
-//	description: string;
+	_id: string;
+	title: string;
+	image: string;
+	price: string;
+	description: string;
 };
 
 type AllItemsType = {
@@ -16,17 +17,30 @@ const ReadAll = () => {
 
 	const [allItems, setAllItems] = useState<AllItemsType>({allItems: []});
 
-	const getAllItems = async () => {
-		const response = await fetch("http://localhost:5000");
-		const jsonResponse: AllItemsType = await response.json();
-		setAllItems(jsonResponse);
-	};
+
+	useEffect(() => {
+		const getAllItems = async () => {
+			const response = await fetch("http://localhost:5000");
+			const jsonResponse: AllItemsType = await response.json();
+			setAllItems(jsonResponse);
+		};
+		getAllItems();
+	}, []);
 
 	return (
 		<>
-			<h1>すべてのアイテムデータ</h1>
-			{allItems && allItems.allItems.map(item => console.log(item))}
-			<button onClick={getAllItems}>全データ取得</button>
+			<div>
+			{allItems && allItems.allItems.map(item =>
+				<Link to={`/item/${item._id}`} key={item._id}>
+					<img src={require(`../../images${item.image}`)} alt="item" />
+					<div>
+						<h2>{item.price}</h2>
+						<h3>{item.title}</h3>
+						<p>{item.description.substring(0, 80)}</p>
+					</div>
+				</Link>
+			)}
+			</div>
 		</>
 
 	);
