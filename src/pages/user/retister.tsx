@@ -32,7 +32,7 @@ const Register = () => {
 
 	return (
 		<>
-			<h1>ユーザ登録ページ</h1>
+			<h1 className="page-title">ユーザ登録ページ</h1>
 			<form onSubmit={handleSubmit}>
 				<input value={name} onChange={(e) =>
 						setName(e.target.value)

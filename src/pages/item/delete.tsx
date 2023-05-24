@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useAuth from "../../utils/useAuth";
 
 const DeleteItemItem = () => {
 
@@ -8,6 +9,7 @@ const DeleteItemItem = () => {
 	const [price, setPrice] = useState("");
 	const [image, setImage] = useState("");
 	const [description, setDescription] = useState("");
+	const [email, setEmail] = useState("");
 
 	useEffect(() => {
 		const getSingleItem = async () => {
@@ -18,6 +20,7 @@ const DeleteItemItem = () => {
 			setPrice(jsonResponse.singleItem.price);
 			setImage(jsonResponse.singleItem.image);
 			setDescription(jsonResponse.singleItem.description);
+			setEmail(jsonResponse.singleItem.email);
 		};
 		getSingleItem();
 	}, [params.id]);
@@ -40,18 +43,24 @@ const DeleteItemItem = () => {
 		}
 	};
 
-	return (
-		<>
-			<h1>アイテム削除</h1>
-			<form onSubmit={handleSubmit}>
-				<h2>{title}</h2>
-				{image && <img src={require(`../../images${image}`)} alt="item" />}
-				<h3>¥{price}</h3>
-				<p>{description}</p>
-				<button>削除</button>
-			</form>
-		</>
-	);
+	const loginUser = useAuth();
+
+	if (loginUser === email) {
+		return (
+			<div className="delete-page">
+				<h1 className="page-title">アイテム削除</h1>
+				<form onSubmit={handleSubmit}>
+					<h2>{title}</h2>
+					{image && <img src={require(`../../images${image}`)} alt="item" />}
+					<h3>¥{price}</h3>
+					<p>{description}</p>
+					<button>削除</button>
+				</form>
+			</div>
+		);
+	} else {
+		return <h1>権限がありません</h1>
+	}
 
 };
 

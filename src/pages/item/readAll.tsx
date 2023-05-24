@@ -7,6 +7,7 @@ type ItemType = {
 	image: string;
 	price: string;
 	description: string;
+	email: string;
 };
 
 type AllItemsType = {
@@ -29,7 +30,7 @@ const ReadAll = () => {
 
 	return (
 		<>
-			<div>
+			<div className="grid-container-in">
 			{allItems && allItems.allItems.map(item =>
 				<Link to={`/item/${item._id}`} key={item._id}>
 					<img src={require(`../../images${item.image}`)} alt="item" />
