@@ -23,8 +23,8 @@ const ReadSingleItem = () => {
 	}, [params.id]);
 
 	return (
-		<>
-			<div className="grid-container-si">
+		<div className="grid-container-si">
+			<div>
 				{image && <img src={require(`../../images${image}`)} alt="item"/>}
 			</div>
 			<div>
@@ -37,7 +37,7 @@ const ReadSingleItem = () => {
 					<Link to={`/item/delete/${params.id}`}>アイテム削除</Link>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 
 };

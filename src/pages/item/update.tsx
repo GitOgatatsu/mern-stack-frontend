@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useAuth from "../../utils/useAuth";
 
-const UpdateItemItem = () => {
+const UpdateItem = () => {
 
 	const params = useParams();
 	const [title, setTitle] = useState("");
@@ -82,4 +82,4 @@ const UpdateItemItem = () => {
 
 };
 
-export default UpdateItemItem;
+export default UpdateItem;

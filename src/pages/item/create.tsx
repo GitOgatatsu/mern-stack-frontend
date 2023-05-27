@@ -58,6 +58,8 @@ const CreateItem = () => {
 				</form>
 			</>
 		);
+	} else {
+		return <h1>ログインしてください</h1>
 	}
 
 };
